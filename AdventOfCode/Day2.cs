@@ -10,6 +10,30 @@ namespace AdventOfCode
     {
         static string regexLine = ".*\n";
         static Regex regex = new Regex(regexLine);
+        
+
+        public static void Part1()
+        {
+            int contadorPares = 0;
+            int contadorTercias = 0;
+            var lines = new Regex(regexLine).Matches(input);
+            foreach (Match match in lines)
+            {
+                string inputLine = match.Value;
+                var groups = inputLine.GroupBy(c => c);
+                bool isPar = false;
+                bool isTercia = false;
+                foreach (var group in groups)
+                {
+                    if (group.Count() == 2) isPar = true;
+                    if (group.Count() == 3) isTercia = true;
+                }
+                contadorPares += isPar ? 1 : 0;
+                contadorTercias += isTercia ? 1 : 0;
+            }
+            Console.WriteLine(contadorTercias * contadorPares);
+            Console.ReadKey();
+        }
 
         public static void Part2()
         {
